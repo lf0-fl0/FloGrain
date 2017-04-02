@@ -33,7 +33,7 @@ FloGrain2 {
 
 		panmod = TGaussRand.ar(rPan.neg,rPan,impulse); //pan is -1/1 so this adds random values arround the actual "pan" value. 0 in pan and 1 in rPan is max stereo
 
-		speedmod = LFNoise2.ar(rSpeedFreq,rSpeed);
+		speedmod = LFNoise2.ar(rSpeedFreq,rSpeed/SampleRate.ir);
 
 		head = Phasor.ar(1, ((BufRateScale.kr(buf)*speed) / info) + speedmod, start, (start+end)); //readhead for Grainbufs pos argument. (bufSize*speed)/bufFrames is  "realtime"
 
