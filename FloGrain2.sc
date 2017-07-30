@@ -47,5 +47,5 @@ FloGrain2 {
 }
 
 
-// * (dense+densemod).reciprocal)
+
 
