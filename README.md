@@ -1,7 +1,8 @@
 #Granular Synth
 
 This is a grain-sampler build on the GrainBuf class in supercollider.
-It contains the modulators i would usually use. 
+It contains the modulators i would usually use. It will only read
+mono files.
 
 Parameters are:
 
@@ -36,7 +37,7 @@ Platform.systemExtensionDir
 
 Demo:
 
-~buf = SoundFile.collectIntoBuffers("/youreFile(s)Here/*",s);
+~buf = SoundFile.collectIntoBuffers("/youreFile(s)Here/*",s); //has to be mono
 
 (
 SynthDef(\grains,
@@ -48,7 +49,8 @@ SynthDef(\grains,
 		var rPosM,player,env, mix;
 
 		player = FloGrain2.ar(buf,freq,rFreq,dense,rDense,rDenseSpeed,size,
-			rSize,speed,rSpeed,rSpeedFreq,start,end,rPos,pan,rPan,amp,rAmp,rAmpSpeed,win:win)*amp;
+			  rSize,speed,rSpeed,rSpeedFreq,start,end,rPos,pan,rPan,amp,rAmp,
+			   rAmpSpeed,win:win)*amp;
 
 		env = EnvGen.ar(Env.adsr(att,dec,sus,rel,1,1),gate:gate,doneAction:2);
 
