@@ -4,28 +4,28 @@ This is a grain-sampler build on the GrainBuf class in supercollider.
 It contains the modulators i would usually use. It will only read
 mono files.
 
-Parameters are:
+##Parameters are:
 
-buf,          
-freq,
-rFreq,
-dense,
-rDense,
-rDenseSpeed,
-size,
-rSize,
-speed,
-rSpeed,
-rSpeedFreq,
-start,
-end,
-rPos,
-pan,
-rPan,
-amp,
-rAmp,
-rAmpSpeed,
-win;
+*buf,          
+*freq,
+*rFreq,
+*dense,
+*rDense,
+*rDenseSpeed,
+*size,
+*rSize,
+*speed,
+*rSpeed,
+*rSpeedFreq,
+*start,
+*end,
+*rPos,
+*pan,
+*rPan,
+*amp,
+*rAmp,
+*rAmpSpeed,
+*win;
 
 You will need the SC3plugins package for supercollider.
 
