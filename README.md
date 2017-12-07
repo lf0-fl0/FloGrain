@@ -50,7 +50,7 @@ SynthDef(\grains,
 
 		player = FloGrain2.ar(buf,freq,rFreq,dense,rDense,rDenseSpeed,size,
 			  rSize,speed,rSpeed,rSpeedFreq,start,end,rPos,pan,rPan,amp,rAmp,
-			   rAmpSpeed,win:win)*amp;
+			   rAmpSpeed,win:win);
 
 		env = EnvGen.ar(Env.adsr(att,dec,sus,rel,1,1),gate:gate,doneAction:2);
 
