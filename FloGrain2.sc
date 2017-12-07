@@ -1,8 +1,4 @@
-/*
-Classic Grainsynth with randomizable pitch,amp,dense,size.
-Size is reciprocal to dense.You have the size arg as a multiplier.
-e.g. size = 2 will overlap 50%.
-*/
+
 
 FloGrain2 {
 
@@ -15,7 +11,7 @@ FloGrain2 {
 		var info, impulse, freqmod, posrand, densemod, sizemod, ampmod, panmod, speedmod, head, sound;
 
 
-		densemod = LFNoise2.ar(rDenseSpeed,dense).abs*rDense; //random walk: max. Grainsize * float
+		densemod = LFDNoise1.ar(rDenseSpeed,dense).abs*rDense; //random walk: max. Grainsize * float
 
 
 		info = BufFrames.kr(buf); //Get framesize of the audiobuffer
@@ -25,21 +21,21 @@ FloGrain2 {
 
 		freqmod = TGaussRand.ar(rFreq.neg.min(0), rFreq,impulse); //frequency modulation triggered by impulse
 
-		ampmod = LFNoise2.ar(rAmpSpeed).abs*rAmp; //amplitude modulation withrandom walk (better triggered ?)
+		ampmod = LFDNoise1.ar(rAmpSpeed).abs*rAmp; //amplitude modulation withrandom walk (better triggered ?)
 
-		sizemod = TGaussRand.ar(0, size*rSize,impulse); //sizemod is relative to size: good/bad?
+		sizemod = TGaussRand.ar(1+rSize, 1-rSize,impulse); //sizemod
 
-		posrand = TGaussRand.ar(rPos.neg, rPos,impulse); //random read-position for Grainbufs "head" or readpoint
+		posrand = TGaussRand.ar(rPos.neg, rPos,impulse) / SampleRate.ir; //random read-position for Grainbufs "head" or readpoint
 
 		panmod = TGaussRand.ar(rPan.neg,rPan,impulse); //pan is -1/1 so this adds random values arround the actual "pan" value. 0 in pan and 1 in rPan is max stereo
 
 		speedmod = LFNoise2.ar(rSpeedFreq,rSpeed/SampleRate.ir);
 
-		head = Phasor.ar(1, ((BufRateScale.kr(buf)*speed) / info) + speedmod, start, (start+end)); //readhead for Grainbufs pos argument. (bufSize*speed)/bufFrames is  "realtime"
+		head = Phasor.ar(1, ((BufRateScale.kr(buf)*speed) / info) + speedmod, start, (start+end),start); //readhead for Grainbufs pos argument. (bufSize*speed)/bufFrames is  "realtime"
 
 
-		sound = GrainBuf.ar(2, impulse, (dense+densemod).reciprocal*(size+sizemod), buf, //get it in the class
-			freq+freqmod, head + posrand ,4,pan+panmod,mul:1-ampmod,envbufnum:win);
+		sound = GrainBuf.ar(2, impulse, size*sizemod, buf, //get it in the class //(dense+densemod).reciprocal*
+			freq+freqmod, (head + posrand).abs ,4, pan+panmod, mul:1-ampmod, envbufnum:win);
 
 		^sound*amp //get it out
 
