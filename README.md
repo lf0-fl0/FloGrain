@@ -37,7 +37,7 @@ Platform.systemExtensionDir
 
 Demo:
 
-~buf = SoundFile.collectIntoBuffers("yourPathHere",s);
+~buf = SoundFile.collectIntoBuffers("yourPathHere/*",s);
 
 (
 SynthDef(\grains,
