@@ -37,20 +37,20 @@ Platform.systemExtensionDir
 
 Demo:
 
-~buf = SoundFile.collectIntoBuffers("/youreFile(s)Here/*",s); //has to be mono
+~buf = SoundFile.collectIntoBuffers("yourPathHere",s);
 
 (
 SynthDef(\grains,
 	{
 		arg gate = 1, buf,freq,rFreq,dense, rDense, rDenseSpeed,
-		size, rSize, speed,rSpeed,rSpeedFreq,start,end, rPos,pan,rPan,
-		amp, rAmp,rAmpSpeed,win,hall,delay,fft,att,dec,sus,rel,hpf,rHall;
+		size,rSize,speed,rSpeed,rSpeedFreq,start,end, rPos,pan,rPan,
+		amp,rAmp,rAmpSpeed,win,hall,delay,fft,att,dec,sus,rel,hpf,posOffset;
 
 		var rPosM,player,env, mix;
 
 		player = FloGrain2.ar(buf,freq,rFreq,dense,rDense,rDenseSpeed,size,
 			  rSize,speed,rSpeed,rSpeedFreq,start,end,rPos,pan,rPan,amp,rAmp,
-			   rAmpSpeed,win:win);
+			   rAmpSpeed,win,posOffset);
 
 		env = EnvGen.ar(Env.adsr(att,dec,sus,rel,1,1),gate:gate,doneAction:2);
 
@@ -72,38 +72,38 @@ Pdef(\oldskool,
 		\win, -1,
 		
 		\freq,1,
-		\rFreq,2.2,
+		\rFreq,Pseg([0,0,8],[4,8],\lin,1),
 
 		\legato,1,
 
-		\dense,2,
-		\rDense,123,
-		\rDenseSpeed,0.1,
+		\dense,Pseg([40,40,1],[4,8],\lin,1),
+		\rDense,Pseg([0,0,12],[4,8],\lin,1),
+		\rDenseSpeed,2,
 
-		\size,Pkey(\dense).reciprocal*0.2,
-		\rSize,1.2,
+		\size,Pkey(\dense).reciprocal*Pseg([0.001,2,1],[4,8],\exp,1),
+		\rSize,0,
 
-		\speed,0.1,
-		\start,0,
+		\speed,Pseg([1,1,0.0],[4,8],\lin,1),
+		\start,Pseries(0,0.05)%1,
 		\end,1,
-		\rPos,0.00015,
+		\rPos,Pseg([0,0,0.2],[4,8],\lin,1),
 
-		\dur,4,
+		\dur,0.25,
 
 		\hpf,120,
 
 		\legato,1.3,
-		\att,4,
+		\att,0.1,
 		\dec,0.01,
 		\sus,1,
-		\rel,4,
+		\rel,0.1,
 
 		\amp,0.5,
-		\rAmp,1,
-		\rAmpSpeed,0.1,
+		\rAmp,0,
+		\rAmpSpeed,0,
 		
 		\pan,0,
-		\rPan,1,
+		\rPan,Pseg([0,0,1],[4,8],\lin,1),
 	)
 ).play;
 )
