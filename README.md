@@ -40,8 +40,8 @@ Demo:
 ~buf = SoundFile.collectIntoBuffers("yourPathHere/*",s);
 
 (
-SynthDef(\grains,
-	{
+SynthDef(\grains,{
+
 		arg gate = 1, buf,freq,rFreq,dense, rDense, rDenseSpeed,
 		size,rSize,speed,rSpeed,rSpeedFreq,start,end, rPos,pan,rPan,
 		amp,rAmp,rAmpSpeed,win,hall,delay,fft,att,dec,sus,rel,hpf,posOffset;
