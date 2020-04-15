@@ -76,9 +76,9 @@ Pdef(\oldskool,
 
 		\legato,1,
 
-		\dense,Pseg([40,40,1],[4,8],\lin,1),
+		\dense,Pseg([40,0.1,1],[4,8],\lin,1),
 		\rDense,Pseg([0,0,12],[4,8],\lin,1),
-		\rDenseSpeed,2,
+		\rDenseSpeed,4,
 
 		\size,Pkey(\dense).reciprocal*Pseg([0.001,2,1],[4,8],\exp,1),
 		\rSize,0,
@@ -109,4 +109,4 @@ Pdef(\oldskool,
 )
 
 lf0
-2017
+2020
