@@ -28,7 +28,7 @@ FloGrain2 {
 
 		head = Phasor.ar(1, (speed*(BufRateScale.kr(buf)/info)) - speedmod, start, end, start) % BufFrames.kr(buf); //readhead points to audiobuffer
 
-		sound = GrainBuf.ar(2, impulse, size+sizemod, buf, //standart grainbuf object
+		sound = GrainBufJ.ar(2, impulse, size+sizemod, buf, //standart grainbuf object
 			freq+freqmod, (head + posrand + posOffset).max(0) , 4, pan + panmod, mul: 1-ampmod, envbufnum:win);
 
 		^sound*amp //get it out
